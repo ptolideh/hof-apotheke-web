@@ -14,6 +14,11 @@
     "validate": "npm-run-all check-types lint format:check"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.6.10",
+    "@emotion/babel-plugin": "^11.3.0",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^4",
     "next": "11.1.2",
     "npm-run-all": "^4.1.5",
     "react": "17.0.2",
