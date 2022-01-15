@@ -63,8 +63,8 @@ const AppSection = (props: any) => {
           <Box sx={s.BodyText}>
             <Text>
               In Germany there are over 20,000 pharmacies with the well-known
-              "Apotheken-A". We, the more than 1,000 LINDA pharmacies, offer you
-              more than just quality medicines.
+              &quot;Apotheken-A&quot;. We, the more than 1,000 LINDA pharmacies,
+              offer you more than just quality medicines.
             </Text>
             <Text>
               Not only that you can collect a lot of PAYBACK points with us ,
