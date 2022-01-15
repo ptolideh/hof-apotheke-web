@@ -69,7 +69,8 @@ export async function getStaticProps(context: any) {
         posts: postsData ? postsData.items[0]?.fields : null,
         promos: promoData ? promoData.items[0]?.fields : null
       }
-    }
+    },
+    revalidate: 1
   };
 }
 

@@ -8,7 +8,8 @@ export async function getStaticProps(context: any) {
     return {
       props: {
         content
-      }
+      },
+      revalidate: 1
     };
   } catch (e) {
     console.log(e);
