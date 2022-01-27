@@ -16,14 +16,14 @@ export const RootWrapper = styled.div(
     paddingTop: 'var(--section-p)',
     paddingBottom: 'calc(3 * var(--section-p))',
     _tabletAndUp: {
-      '--lg-card-radii': 'var(--s-24)'
+      '--lg-card-radii': 'var(--s-24)',
     },
     _laptopAndUp: {
-      '--section-p': 'var(--s-32)',
-      marginTop: 'var(--s-64)',
-      paddingBottom: 'var(--section-p)'
-    }
-  })
+      '--section-p': 'var(--s-48)',
+      marginTop: 'var(--s-24)',
+      paddingBottom: 'var(--section-p)',
+    },
+  }),
 );
 
 export const BgImage = styled.div({
@@ -42,14 +42,14 @@ export const BgImage = styled.div({
     maxHeight: '100%',
     'img': {
       objectFit: 'fill',
-      objectPosition: 'center'
-    }
-  }
+      objectPosition: 'center',
+    },
+  },
 });
 
 export const CardsGrid = (props: BoxProps) => (
   <Grid
-    as={MaxWidthWrapper}
+    // as={MaxWidthWrapper}
     className="aboveFold__cards-grid"
     templateColumns="repeat(5, 1fr)"
     gap="var(--s-24)"
@@ -78,6 +78,7 @@ export const SliderColumn = (props: BoxProps) => (
     className="aboveFold__slider-col"
     position="relative"
     zIndex={2}
+    w="100%"
     gridColumn={['1/-1', null, null, '3 / -1']}
     {...props}
   />

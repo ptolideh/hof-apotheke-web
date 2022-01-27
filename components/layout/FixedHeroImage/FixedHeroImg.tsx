@@ -27,7 +27,6 @@ export const FixedHeroImg = (props: any) => {
           objectFit="cover"
           objectPosition={imagePosition}
           priority={true}
-          placeholder="blur"
         />
         <CenterBox>{children}</CenterBox>
       </ImageBox>

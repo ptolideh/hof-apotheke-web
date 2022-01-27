@@ -28,22 +28,22 @@ const slides = [
     image: NewsImage1,
     title: 'Lorem ipsum!',
     details:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas risus ultricies pulvinar tincidunt.'
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas risus ultricies pulvinar tincidunt.',
   },
   {
     url: '/news-2',
     image: NewsImage1,
     title: 'Lorem ipsum dolor sit amet! Lorem ipsum dolor sit amet',
     details:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas risus ultricies pulvinar tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas risus ultricies pulvinar tincidunt.'
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas risus ultricies pulvinar tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas risus ultricies pulvinar tincidunt.',
   },
   {
     url: '/news-3',
     image: NewsImage1,
     title: 'Lorem ipsum dolor sit amet!',
     details:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas risus ultricies pulvinar tincidunt.'
-  }
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas risus ultricies pulvinar tincidunt.',
+  },
 ];
 
 import * as s from './OffersSection.styles';
@@ -64,20 +64,21 @@ const OffersSlider = (/* props: OffersSliderType */) => {
     slidesToScroll: 1,
     autoplay: true,
     pauseOnHover: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 2000000,
     cssEase: 'ease',
     responsive: [
       {
-        breakpoint: BREAKPOINTS.tabletMin,
+        breakpoint: 800,
+        // breakpoint: BREAKPOINTS.tabletMin,
         settings: {
-          slidesToShow: 1
-        }
-      }
+          slidesToShow: 1,
+        },
+      },
     ],
     appendDots: (dots: any) => (
       <s.PaginationWrapper>{dots}</s.PaginationWrapper>
     ),
-    customPaging: (i: number) => <s.PaginationDot />
+    customPaging: (i: number) => <s.PaginationDot />,
     // fade: true
   };
   return (
@@ -87,44 +88,51 @@ const OffersSlider = (/* props: OffersSliderType */) => {
       </s.HeaderWrapper>
       <s.ContentWrapper>
         <DecorativeTriangle />
-        <s.SliderWrapper bgColor="transparent" maxWidth="lg">
+        <s.SliderWrapper bgColor="transparent" maxWidth="md">
           <Slider ref={sliderRef} {...settings}>
-            {slides.map((promo: any, index: number) => (
-              <s.Slide key={index}>
-                <s.SlideImage>
-                  <NextImage src={promo.image} />
-                </s.SlideImage>
-                <Box as="div">
-                  <s.SlideTitle>{promo.title}</s.SlideTitle>
-                  <s.SlideText>{promo.details}</s.SlideText>
-                </Box>
-                <s.ActionIconButton
-                  size="32px"
-                  color="var(--hof-colors-blue)"
-                />
-              </s.Slide>
-              // <s.Slide key={promo.sys.id}>
-              //   <s.SlideImage>
-              //     <NextImage
-              //       src={'https:' + promo.fields.image.fields.file.url}
-              //       layout="fill"
-              //     />
-              //   </s.SlideImage>
-              //   <Box as="div">
-              //     <s.SlideTitle>{promo.fields.title}</s.SlideTitle>
-              //     <s.SlideText>{promo.fields.summary}</s.SlideText>
-              //   </Box>
-              //   <s.ActionIconButton
-              //     size="32px"
-              //     color="var(--hof-colors-blue)"
-              //   />
+            {topPromos.map(
+              (promo: any, index: number) => (
+                // <s.Slide key={index}>
+                //   <s.SlideImage>
+                //     <NextImage src={promo.image} />
+                //   </s.SlideImage>
+                //   <Box as="div">
+                //     <s.SlideTitle>{promo.title}</s.SlideTitle>
+                //     <s.SlideText>{promo.details}</s.SlideText>
+                //   </Box>
+                //   <s.ActionIconButton
+                //     size="32px"
+                //     color="var(--hof-colors-blue)"
+                //   />
+                // </s.Slide>
+                // null
+                <s.Slide key={promo.sys.id}>
+                  <s.SlideImage>
+                    <NextImage
+                      src={'https:' + promo.fields.image.fields.file.url}
+                      layout="fill"
+                    />
+                  </s.SlideImage>
+                  <Flex direction="column" justify="space-between" h="100%">
+                    <Box as="div">
+                      <s.SlideTitle>{promo.fields.title}</s.SlideTitle>
+                      <s.SlideText>{promo.fields.summary}</s.SlideText>
+                    </Box>
+                    <s.ActionIconButton
+                      size="32px"
+                      color="var(--hof-colors-blue)"
+                    />
+                  </Flex>
+                </s.Slide>
+              ),
+
               // </s.Slide>
               // <NextLink
               //   key={promo.sys.id}
               //   href={'/promos/' + promo.fields.slug}
               // >
               // </NextLink>
-            ))}
+            )}
           </Slider>
         </s.SliderWrapper>
       </s.ContentWrapper>
@@ -144,115 +152,13 @@ const DecorativeTriangle = () => (
       filter: 'drop-shadow(0 0 10px hsl(200, 68%, 86%))',
       width: '60vw',
       _tabletLargeAndUp: {
-        width: '50vw'
+        width: '50vw',
       },
       _laptopAndUp: {
-        width: '40vw'
-      }
+        width: '40vw',
+      },
     })}
   />
 );
-
-const styles = withStyle('Offers', {
-  // SectionWrapper: {
-  //   '--slide-padding': ['var(--s-24)', null, null, 'var(--s-32)'],
-  //   '--slide-margin': ['var(--s-16)'],
-  //   width: '100%',
-  //   maxWidth: '100%',
-  //   props: {
-  //     spacing: 0,
-  //     mt: 'var(--s-128)'
-  //   }
-  // },
-  // HeadingWrapper: {
-  //   paddingBottom: ['var(--s-48)'],
-  //   '& h2': {
-  //     paddingLeft: 'var(--slide-margin)'
-  //   }
-  // },
-  // ContentWrapper: {
-  //   props: {
-  //     as: 'main'
-  //   },
-  //   position: 'relative',
-  //   width: '100%',
-  //   px: 0,
-  //   pt: ['var(--s-24)', null, 'var(--s-32)'],
-  //   pb: ['var(--s-64)', null, null, 'var(--s-96)']
-  //   // top spacing b/w triangle & slider
-  // },
-  // Triangle: {
-  //   position: 'absolute',
-  //   left: 0,
-  //   top: 0,
-  //   filter: 'drop-shadow(0 0 10px hsl(200, 68%, 86%))',
-  //   props: {
-  //     width: ['60vw', null, '50vw', '40vw']
-  //   }
-  // },
-  // Slide: {
-  //   position: 'relative',
-  //   display: 'flex !important',
-  //   flexDirection: 'column',
-  //   alignItems: 'flex-start',
-  //   justifyContent: 'flex-start',
-  //   width: 'fit-content !important',
-  //   margin: 'var(--slide-margin)',
-  //   padding: 'var(--slide-padding)',
-  //   overflow: 'hidden',
-  //   backgroundColor: 'white',
-  //   borderRadius: 'var(--s-16)',
-  //   boxShadow: '0 6px 12px hsl(215, 60%, 80%, 0.6)',
-  //   height: ['400px', null, 'var(--s-384)'],
-  //   transition: 'var(--transition-med)',
-  //   transform: 'translateY(0)',
-  //   //
-  //   ':hover': {
-  //     cursor: 'pointer',
-  //     transform: 'translateY(-4px)',
-  //     // boxShadow: '0 6px 12px hsl(215, 60%, 60%, 0.6)',
-  //     //
-  //     'h3': {
-  //       color: 'hsl(208, 99%, 38%)',
-  //       transition: 'var(--transition-med)'
-  //     },
-  //     //
-  //     'figure::before': {
-  //       opacity: '0.2'
-  //     },
-  //     'img': {
-  //       transition: 'transform 800ms ease-out',
-  //       transform: 'scale(1.03)'
-  //     }
-  //   }
-  // },
-  PaginationStack: {
-    pt: 'var(--s-20) !important',
-    bottom: '-40px !important',
-    //
-    '& li': {
-      width: 'fit-content !important',
-      height: 'auto !important'
-    },
-    //
-    '& li.slick-active > div': {
-      backgroundColor: 'var(--hof-colors-blue)'
-    }
-  },
-  PaginationItem: {
-    boxSizing: 'content-box',
-    display: 'inline-block',
-    height: ['var(--s-20)', null, 'var(--s-16)'],
-    width: ['var(--s-20)', null, 'var(--s-16)'],
-    borderRadius: '50%',
-    mx: '4px',
-    backgroundColor: 'hsl(0, 0%, 90%)',
-    boxShadow: 'inset 0 1px 3px hsl(0, 0%, 80%)',
-    //
-    ':hover': {
-      backgroundColor: 'hsl(208, 99%, 88%);'
-    }
-  }
-});
 
 export { OffersSlider };

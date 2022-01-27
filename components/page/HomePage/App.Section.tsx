@@ -6,9 +6,11 @@ import {
   useMemo,
   useRef,
   memo,
-  SVGProps
+  SVGProps,
 } from 'react';
 import styled from '@emotion/styled';
+
+import { QUERIES, withMQ as mq } from '../../../context/theme';
 
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import {
@@ -18,7 +20,7 @@ import {
   Grid,
   GridItem,
   chakra,
-  HStack
+  HStack,
 } from '@chakra-ui/react';
 // import { SVGWrapper } from '../components/shared/svg';
 // import { QUERIES } from '../context/theme';
@@ -31,6 +33,9 @@ import { SVGWrapper } from '../../display/SvgWrapper';
 import { MaxWidthWrapper } from '../../layout/MaxWidthWrapper';
 import { withStyle, withStyles } from '../../../styles/withStyle';
 import { AppDownloadStickers } from '../../display/AppDownloadStickers';
+import { useHomeContent } from '../../../context/content/HomePageContent';
+import { RichTextContainer } from '../../display/RichTextContainer';
+import { SectionWrapper } from '../../layout/SectionWrapper';
 
 // CONSTANTS
 
@@ -38,48 +43,45 @@ import { AppDownloadStickers } from '../../display/AppDownloadStickers';
 // type AppSectionType = {};
 
 const AppSection = (props: any) => {
+  const content = useHomeContent();
+
+  console.log('app section content -->>>', content);
+  const sectionTitle = content?.main?.appSectionTitle ?? '';
+  const sectionText = content?.main?.appSectionText ?? [];
   return (
-    //
-    <MaxWidthWrapper>
-      <SectionHeading
-        className="AppSection-Title"
-        display={[null, null, 'none !important']}
-        sx={{
-          mt: '64px',
-          width: '100% !important',
-          justifyContent: 'center !important'
-        }}
-      >
-        Get the Gesund.de App
-      </SectionHeading>
-      <Grid {...s.ContentGrid}>
-        <GridItem {...s.DetailsGridCol}>
-          <SectionHeading
-            className="AppSection-Title"
-            display={['none !important', null, 'inline-flex !important']}
-          >
-            Get the Gesund.de App
-          </SectionHeading>
-          <Box sx={s.BodyText}>
-            <Text>
-              In Germany there are over 20,000 pharmacies with the well-known
-              &quot;Apotheken-A&quot;. We, the more than 1,000 LINDA pharmacies,
-              offer you more than just quality medicines.
-            </Text>
-            <Text>
-              Not only that you can collect a lot of PAYBACK points with us ,
-              but also that we are probably the best partner for competent
-              solutions for everything to do with your wellbeing.
-            </Text>
-          </Box>
-          <AppDownloadStickers />
-        </GridItem>
-        <SVGWrapper component={PhoneBackground} sx={s.BgEffectImage} />
-        <GridItem {...s.ImageGridCol}>
-          <NextImage src={AppImage} />
-        </GridItem>
-      </Grid>
-      {/* <SectionWrapper>
+    <SectionWrapper maxWidth="lg">
+      <MaxWidthWrapper px={['24px', '32px', null, '16px']}>
+        <SectionHeading
+          className="AppSection-Title"
+          display={[null, null, 'none !important']}
+          sx={{
+            mt: '64px',
+            width: '100% !important',
+            justifyContent: 'center !important',
+          }}
+        >
+          {sectionTitle}
+        </SectionHeading>
+        <Grid {...s.ContentGrid}>
+          <GridItem {...s.DetailsGridCol}>
+            <SectionHeading
+              // whiteSpace={[null, null, null, 'nowrap']}
+              className="AppSection-Title"
+              display={['none !important', null, 'inline-flex !important']}
+            >
+              {sectionTitle}
+            </SectionHeading>
+            <Box sx={s.BodyText}>
+              <RichTextContainer content={sectionText} />
+            </Box>
+            <AppDownloadStickers />
+          </GridItem>
+          <SVGWrapper component={PhoneBackground} sx={s.BgEffectImage} />
+          <GridItem {...s.ImageGridCol}>
+            <NextImage src={AppImage} />
+          </GridItem>
+        </Grid>
+        {/* <SectionWrapper>
         <BodyText>
           <p>
             In Germany there are over 20,000 pharmacies with the well-known
@@ -108,7 +110,8 @@ const AppSection = (props: any) => {
           <NextImage src={AppImage} />
         </ImageGridColumn>
       </SectionWrapper> */}
-    </MaxWidthWrapper>
+      </MaxWidthWrapper>
+    </SectionWrapper>
   );
 };
 // {/* */}
@@ -117,12 +120,12 @@ const AppSection = (props: any) => {
 
 const s = withStyles('AppSection', {
   ContentGrid: {
-    mt: ['var(--s-48)', null, 'var(--s-128)'],
+    mt: ['var(--s-48)', null, 'var(--s-96)'],
     templateColumns: ['repeat(12, 1fr)'],
     templateRows: ['auto auto', null, '1fr'],
     gap: ['16px'],
     position: 'relative',
-    mb: ['96px', null, '196px', '256px']
+    mb: ['var(--s-64)', null, null, '196px'],
   },
   ImageGridCol: {
     gridColumn: ['1 / -1', null, '8/-1'],
@@ -137,52 +140,57 @@ const s = withStyles('AppSection', {
       /* NextJS image fixes */
       '& > div': {
         height: '100%',
-        maxHeight: '100%'
+        maxHeight: '100%',
       },
       '& img': {
         objectFit: 'cover',
-        objectPosition: 'center'
-      }
-    }
+        objectPosition: 'center',
+      },
+    },
   },
   DetailsGridCol: {
     gridColumn: ['1/ -1', null, '1/8'],
     gridRow: ['2', null, '1'],
-    my: ['var(--s-32)', null, 0]
+    my: ['var(--s-32)', null, 0],
   },
   BgEffectImage: {
     position: 'absolute',
     width: ['110%', '80%', '55%'],
-    top: ['0', null, '-10%'],
-    right: ['0', null, '-10%']
+    maxWidth: '700px',
+    top: ['0', null, '-10%', '-20%'],
+    right: 0,
+    // right: '-10%',
+    // right: ['0', null, '-10%'],
     // transform: 'scale(1.25)'
   },
-  BodyText: {
-    fontSize: 'var(--text-18)',
-    lineHeight: '1.7',
-    my: 'var(--s-48)',
+  BodyText: mq({
     'p': {
-      mb: 'var(--s-16)'
-    }
-  }
+      fontSize: 'var(--text-18) !important',
+      lineHeight: '1.7',
+      mb: 'var(--s-16)',
+    },
+    _tabletLargeAndUp: {
+      my: 'var(--s-48)',
+    },
+  }),
 });
 
-const SectionWrapper = styled.div`
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(4, auto);
-  align-content: start;
-  max-height: var(--s-640);
-  max-width: 1000px;
-  margin: 40px auto;
+// const SectionWrapper = styled.div`
+//   display: grid;
+//   width: 100%;
+//   grid-template-columns: repeat(12, 1fr);
+//   grid-template-rows: repeat(4, auto);
+//   align-content: start;
+//   max-height: var(--s-640);
+//   max-width: 1000px;
+//   margin: 40px auto;
 
-  .AppSection-Title {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    margin-bottom: var(--s-32);
-  }
-`;
+//   .AppSection-Title {
+//     grid-column: 1 / -1;
+//     grid-row: 1;
+//     margin-bottom: var(--s-32);
+//   }
+// `;
 
 const BodyText = styled.div`
   grid-column: 1 / -1;

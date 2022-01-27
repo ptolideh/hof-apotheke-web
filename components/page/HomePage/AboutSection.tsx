@@ -1,4 +1,5 @@
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
+import NextLink from 'next/link';
 import { Box, BoxProps, Text, Flex } from '@chakra-ui/react';
 
 import storeImage from '../../../public/images/home/store.png';
@@ -19,7 +20,7 @@ const AboutSection = (/* props: AboutSectionType */) => {
       maxWidth="sm"
       bgColor="var(--hof-colors-blue-lighter)"
       pt={['var(--s-64)', 'var(--s-96)', null, 'var(--s-256)']}
-      pb={['var(--s-32)', 'var(--s-48)', null, 'var(--s-128)']}
+      pb={['var(--s-32)', 'var(--s-48)', null, 'var(--s-96)']}
       w="100%"
     >
       <s.InnerContainer>
@@ -31,6 +32,9 @@ const AboutSection = (/* props: AboutSectionType */) => {
         </s.StoreImage>
         <s.AboutText>
           <RichTextContainer content={main.aboutSectionText.content[0]} />
+          <NextLink href="/uber-uns">
+            <a className="learn-more">Learn more</a>
+          </NextLink>
         </s.AboutText>
       </s.InnerContainer>
     </SectionWrapper>

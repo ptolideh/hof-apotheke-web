@@ -10,6 +10,9 @@ import { QUERIES } from '../../../context/theme';
 // import { SVGWrapper } from '../components/shared/svg';
 // import { QUERIES } from '../context/theme';
 import { StoreInfoItem } from '../../display/StoreInfo';
+import { SectionWrapper } from '../../layout/SectionWrapper';
+import { useHomeContent } from '../../../context/content/HomePageContent';
+import { removeAllWhiteSpace } from '../../../utils';
 // import Img from '../public/images/';
 
 // CONSTANTS
@@ -18,7 +21,7 @@ const info: any /* InfoType */ = {
   address: 'Louisenstr. 5561348 Bad Homburg',
   email: 'info@hofapotheke.com',
   phone: '06172 92420',
-  fax: '06172 924292'
+  fax: '06172 924292',
 };
 
 // TYPES
@@ -26,24 +29,53 @@ const info: any /* InfoType */ = {
 
 const StoreInfoFooterCard = (/* props: StoreInfoFooterCardType */) => {
   const infoEntries = Object.entries(info) as any; /* as InfoEntriesType */
+  const { storeInfo } = useHomeContent();
+  const { address, mapUrl, phone, fax, email } = storeInfo;
+
+  const inlineStyles = {
+    className: 'StoreInfoWrapper-item',
+    color: 'var(--hof-colors-blue)',
+  };
   return (
-    <MaxWidthWrapper>
+    <SectionWrapper maxWidth="lg">
       <Paper
         p="var(--s-32)"
         boxShadow="0 4px 15px var(--hof-colors-orange)"
         mb="48px"
       >
         <StoreInfoWrapper>
-          {infoEntries.map(([variant, text]: any) => (
-            <StoreInfoItem
-              className="StoreInfoWrapper-item"
-              key={variant}
-              variant={variant}
-              color="var(--hof-colors-blue)"
-            >
-              {text}
+          {address && (
+            <StoreInfoItem variant="address" href={mapUrl} style={inlineStyles}>
+              {address}
             </StoreInfoItem>
-          ))}
+          )}
+          {email && (
+            <StoreInfoItem
+              variant="email"
+              href={`mailto:${email.trim()}}`}
+              style={inlineStyles}
+            >
+              {email}
+            </StoreInfoItem>
+          )}
+          {phone && (
+            <StoreInfoItem
+              variant="phone"
+              href={`tel:${removeAllWhiteSpace(phone)}`}
+              style={inlineStyles}
+            >
+              {phone}
+            </StoreInfoItem>
+          )}
+          {fax && (
+            <StoreInfoItem
+              variant="fax"
+              href={`fax:${removeAllWhiteSpace(fax)}`}
+              style={inlineStyles}
+            >
+              {fax}
+            </StoreInfoItem>
+          )}
         </StoreInfoWrapper>
         <Box
           className="mapouter"
@@ -74,28 +106,42 @@ const StoreInfoFooterCard = (/* props: StoreInfoFooterCardType */) => {
           </Box>
         </Box>
       </Paper>
-    </MaxWidthWrapper>
+    </SectionWrapper>
   );
 };
 
 // STYLED ELEMENTS ////////////////////////////////////////
 
 const StoreInfoWrapper = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   align-items: baseline;
-  padding-bottom: var(--s-32);
-  gap: var(--s-32);
+  width: 100%;
+  /* display: grid; */
+  /* grid-template-columns: 1fr; */
+  /* align-content: center; */
+  /* align-items: baseline; */
+  padding-bottom: var(--s-16);
+  /* gap: var(--s-32); */
 
-  @media ${QUERIES.tabletLargeAndUp} {
+  @media (min-width: 43rem) {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--s-16);
+    margin: 0 auto;
+  }
+
+  @media ${QUERIES.tabletLargeAndUp} {
+    max-width: 80%;
   }
 
   @media ${QUERIES.laptopAndUp} {
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    justify-content: space-between;
+    /* grid-template-columns: 2fr 1fr 1fr 1fr; */
   }
 
   .StoreInfoWrapper-item .StoreInfoItem-text {

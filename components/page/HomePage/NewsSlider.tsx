@@ -26,28 +26,12 @@ const NewsSlider = (/* props: NewsSliderType */) => {
     fade: true,
     autoplay: true,
     pauseOnHover: true,
-    autoplaySpeed: 5000,
-    cssEase: 'ease-in-out'
+    autoplaySpeed: 500000,
+    cssEase: 'ease-in-out',
   };
 
   return (
     <s.SliderWrapper id="NewsSlider">
-      <s.ButtonsWrapper>
-        <SliderButton
-          aria-label="Got to previous slide"
-          slider={sliderRef}
-          goTo="prev"
-          sx={s.SliderButtonSX}
-          size="sm"
-        />
-        <SliderButton
-          aria-label="Got to next slide"
-          slider={sliderRef}
-          goTo="next"
-          sx={s.SliderButtonSX}
-          size="sm"
-        />
-      </s.ButtonsWrapper>
       <Slider ref={sliderRef} {...settings}>
         {topPosts.map((post: any, index: number) => (
           <s.Slide key={post.sys.id} index={index}>
@@ -74,6 +58,24 @@ const NewsSlider = (/* props: NewsSliderType */) => {
           </s.Slide>
         ))}
       </Slider>
+      <s.SliderFooter>
+        <s.ButtonsWrapper>
+          <SliderButton
+            aria-label="Got to previous slide"
+            slider={sliderRef}
+            goTo="prev"
+            sx={s.SliderButtonSX}
+            size="md"
+          />
+          <SliderButton
+            aria-label="Got to next slide"
+            slider={sliderRef}
+            goTo="next"
+            sx={s.SliderButtonSX}
+            size="md"
+          />
+        </s.ButtonsWrapper>
+      </s.SliderFooter>
     </s.SliderWrapper>
   );
 };
@@ -94,8 +96,8 @@ const LearnMoreLink = (p: { slug: string }) => (
       borderRadius: '8px',
       ':hover': {
         textDecoration: 'none',
-        bgColor: 'hsl(1, 67%, 49%, 0.08)'
-      }
+        bgColor: 'hsl(1, 67%, 49%, 0.08)',
+      },
     }}
   >
     Learn more

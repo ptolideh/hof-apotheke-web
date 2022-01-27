@@ -3,14 +3,15 @@ import styled from '@emotion/styled';
 import { withMQ as mq } from '../../../context/theme';
 import {
   SectionWrapper,
-  SectionWrapperPropTypes
+  SectionWrapperPropTypes,
 } from '../../layout/SectionWrapper';
 
 export const RootWrapper = (p: SectionWrapperPropTypes) => (
   <SectionWrapper
     position="relative"
     px={0}
-    py={['var(--s-96)', 'var(--s-64)']}
+    pt={['var(--s-96)', 'var(--s-64)']}
+    pb={['var(--s-36)', null, 'var(--s-40)', 'var(--s-56)']}
     {...p}
   />
 );
@@ -28,61 +29,66 @@ export const ServicesContainer = styled.div(
     borderRadius: 'var(--chakra-radii-2xl)',
     marginTop: 0,
     _tabletAndUp: {
-      gap: 'var(--s-24)'
+      gap: 'var(--s-24)',
     },
     _tabletLargeAndUp: {
-      gridTemplateColumns: 'repeat(auto-fit, minmax(min(352px, 100%), 1fr))'
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(352px, 100%), 1fr))',
     },
     _laptopAndUp: {
       maxWidth: '1100px',
-      margin: '0 auto'
-    }
-  })
+      margin: '0 auto',
+    },
+  }),
 );
 
-export const ServiceCard = styled.article({
-  display: 'grid',
-  gridTemplateColumns: 'auto 1fr',
-  gridTemplateRows: 'auto auto',
-  gap: 'var(--s-8) var(--s-16)',
-  alignContent: 'start',
-  justifyContent: 'start',
-  padding: 'var(--s-16)',
-  borderRadius: 'var(--chakra-radii-xl)',
-  width: '100%',
-  maxWidth: '100%',
-  backgroundColor: 'transparent',
-  transition: 'var(--transition-med)',
-  ':hover': {
-    cursor: 'default'
-    // cursor: 'pointer',
-    // backgroundColor: 'hsl(0, 0%, 97%)'
-  }
-});
+export const ServiceCard = styled.article(
+  mq({
+    display: 'grid',
+    gridTemplateColumns: 'auto 1fr',
+    gridTemplateRows: 'auto auto',
+    gap: 'var(--s-8) var(--s-16)',
+    alignContent: 'start',
+    justifyContent: 'start',
+    padding: 'var(--s-16) 0',
+    borderRadius: 'var(--chakra-radii-xl)',
+    width: '100%',
+    maxWidth: '100%',
+    backgroundColor: 'transparent',
+    transition: 'var(--transition-med)',
+    ':hover': {
+      cursor: 'default',
+      // cursor: 'pointer',
+      // backgroundColor: 'hsl(0, 0%, 97%)'
+    },
+    _tabletAndUp: {
+      padding: 'var(--s-16)',
+    },
+  }),
+);
 
 export const ServiceIcon = styled.span({
   gridColumn: '1',
   gridRow: '1 / -1',
   alignSelf: 'start',
-  marginTop: '-2px'
+  marginTop: '-2px',
 });
 
 export const ServiceTitle = styled.h3(
   mq({
     gridColumn: 2,
     gridRow: 1,
-    lineHeight: '1',
+    lineHeight: '1.5',
     color: 'var(--hof-colors-blue)',
     fontWeight: 'var(--weight-semibold)',
     fontSize: 'var(--text-18)',
     width: '100%',
-    textDecoration: 'underline',
+    // textDecoration: 'underline',
     textUnderlineOffset: '0.15em',
     fontFamily: 'var(--font-poppings)',
     _tabletLargeAndUp: {
-      textDecoration: 'revert'
-    }
-  })
+      textDecoration: 'revert',
+    },
+  }),
 );
 
 export const ServiceDetails = styled.p({
@@ -90,7 +96,7 @@ export const ServiceDetails = styled.p({
   gridRow: '2',
   fontSize: 'var(--text-16)',
   lineHeight: '1.5',
-  width: '100%'
+  width: '100%',
 });
 
 // const ServicesContainer = styled.div`

@@ -17,9 +17,8 @@ import { QUERIES } from '../../../context/theme';
 export const MaxWidthWrapper = styled(Box)`
   padding: 0 16px;
   margin: 0;
-  margin-left: auto;
-  margin-right: auto;
-  min-width: min(100%, var(--max-w));
+  width: 100%;
+  /* min-width: min(100%, var(--max-w));z */
   max-width: var(--max-w);
 
   @media ${QUERIES.tabletLargeAndUp} {

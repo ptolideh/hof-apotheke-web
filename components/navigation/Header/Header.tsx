@@ -11,33 +11,6 @@ import { HALink } from '../HA_Link';
 
 // CONSTANTS ///////////////////////////////
 
-const navLinks = [
-  {
-    text: 'services',
-    url: '/services',
-    subLinks: [
-      { text: 'Pre-Order Medication', url: '/pm' },
-      { text: 'Free Delivery Service', url: '/fds' },
-      { text: 'Rental Service', url: '/rs' },
-      { text: 'Hof Customer Card', url: '/hcc' },
-      { text: 'Medicinal & Care Aids', url: '/mca' },
-      { text: 'Recipes', url: '/r' }
-    ]
-  },
-  {
-    text: 'about',
-    url: '/about',
-    subLinks: [
-      { text: 'who we are', url: '/who-we-are' },
-      { text: 'Our team', url: '/our-team' },
-      { text: 'Our history', url: '/our-history' }
-    ]
-  },
-  { text: 'contact us', url: '/contact-us' },
-  { text: 'offers & news', url: '/offers-news' },
-  { text: 'app', url: '/#app' }
-];
-
 // TYPES
 // type HeaderType = {};
 
@@ -107,13 +80,13 @@ function serializeIncomingData(content: any) {
         })
         .map((sLink: any) => ({
           text: sLink.fields.label,
-          url: sLink.fields.url
+          url: sLink.fields.url,
         }));
 
       return {
         text: mLink.fields.label,
         url: mLink.fields.url,
-        subLinks
+        subLinks,
       };
     });
 
@@ -137,9 +110,10 @@ const styles = {
     '&.sticky': {
       boxShadow: '0 5px 10px -1px hsl(0, 0%, 30%, 0.3)',
       '#logo': {
-        width: '148px'
-      }
-    }
+        width: '175px',
+      },
+      '--p-top': '8px',
+    },
   },
   Ribbon: {
     position: 'absolute',
@@ -148,20 +122,22 @@ const styles = {
     left: 0,
     height: 'var(--p-top)',
     width: '100%',
-    backgroundColor: 'var(--hof-colors-red)'
+    transition: 'height 150ms ease',
+    backgroundColor: 'var(--hof-colors-red)',
   },
   Content: {
     spacing: 'auto',
     sx: {
       width: '100%',
       paddingTop: 'var(--p-top)',
-      paddingRight: 'var(--base-gap)',
-      alignItems: 'flex-end'
-    }
+      paddingRight: '32px',
+      alignItems: 'flex-end',
+      transition: 'padding 150ms ease',
+    },
   },
   logo: {
-    transition: 'width 300ms ease',
-    width: ['var(--s-192)', null, 'var(--s-256)', null /* 'var(--s-384)' */]
+    transition: 'width 150ms ease',
+    width: ['var(--s-192)', null, 'var(--s-256)', null /* 'var(--s-384)' */],
   },
   pseudoWrapper: {
     opacity: 0,
@@ -169,10 +145,10 @@ const styles = {
     '&.sticky': {
       boxShadow: 'none',
       '#logo': {
-        width: '148px'
-      }
-    }
-  }
+        width: '175px',
+      },
+    },
+  },
 };
 
 export { Header };

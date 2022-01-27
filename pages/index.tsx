@@ -10,7 +10,7 @@ import {
   Heading,
   Spacer,
   LinkProps,
-  BoxProps
+  BoxProps,
 } from '@chakra-ui/react';
 import { QUERIES } from '../context/theme';
 import { createContext, ReactNode, useContext } from 'react';
@@ -23,12 +23,13 @@ import {
   RegularServicesSection,
   AppSection,
   StoreInfoFooterCard,
-  AboveFoldSection
+  AboveFoldSection,
 } from '../components/page/HomePage';
 import { PrimaryServicesSection as PrimaryServices } from '../components/page/HomePage/PrimaryServicesSection';
 import { OffersSlider } from '../components/page/HomePage';
 import { getEntries } from '../store';
 import { HomeContentContext } from '../context/content/HomePageContent';
+import { AnchorTag } from '../components/navigation/AnchorTag';
 
 const Home: NextPage = ({ content }: any) => {
   console.log('HOME PAGE CONTENT ->>>>', content);
@@ -46,7 +47,8 @@ const Home: NextPage = ({ content }: any) => {
         <PrimaryServices />
         <RegularServicesSection />
         <OffersSlider />
-        {/* <AppSection /> */}
+        <AnchorTag id="app" />
+        <AppSection />
         <StoreInfoFooterCard />
 
         {/* <Footer /> */}
@@ -67,10 +69,10 @@ export async function getStaticProps(context: any) {
         main: homeData ? homeData.items[0].fields : null,
         storeInfo: storeInfoData ? storeInfoData.items[0].fields : null,
         posts: postsData ? postsData.items[0]?.fields : null,
-        promos: promoData ? promoData.items[0]?.fields : null
-      }
+        promos: promoData ? promoData.items[0]?.fields : null,
+      },
     },
-    revalidate: 1
+    revalidate: 1,
   };
 }
 

@@ -29,11 +29,11 @@ const PageHeadingBox = styled(Flex)({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  zIndex: 1
+  zIndex: 1,
 });
 
 const PageSubtitle = styled(Text)({
-  fontSize: 'var(--text-24)'
+  fontSize: 'var(--text-24)',
 });
 
 const PageTitle = styled(Heading)({
@@ -49,8 +49,8 @@ const PageTitle = styled(Heading)({
     content: '""',
     width: '40%',
     height: '6px',
-    backgroundColor: 'var(--hof-colors-red)'
-  }
+    backgroundColor: 'var(--hof-colors-red)',
+  },
 });
 
 const PageHeadingStack = styled(VStack)({
@@ -62,5 +62,5 @@ const PageHeadingStack = styled(VStack)({
   maxWidth: 'var(--s-768)',
   textAlign: 'center',
   border: '1px solid hsl(0, 0%, 0%, 0.05)',
-  borderRadius: '24px 0 24px 0'
+  borderRadius: '24px 0 24px 0',
 });

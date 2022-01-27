@@ -4,7 +4,7 @@ import {
   Eyedropper,
   FirstAidKit,
   IdentificationCard,
-  Leaf
+  Leaf,
 } from 'phosphor-react';
 
 import { useHomeContent } from '../../../context/content/HomePageContent';
@@ -23,12 +23,12 @@ const icons = {
   'IdentificationCard': IdentificationCard,
   'FirstAidKit': FirstAidKit,
   'Leaf': Leaf,
-  'Eyedropper': Eyedropper
+  'Eyedropper': Eyedropper,
 } as any;
 
 const RegularServicesSection = (/* props: RegularServicesSectionType */) => {
   const {
-    main: { secondaryServices: regularServices }
+    main: { secondaryServices: regularServices },
   } = useHomeContent();
   console.log('regularServices--->>>', regularServices);
 
@@ -45,9 +45,10 @@ const RegularServicesSection = (/* props: RegularServicesSectionType */) => {
               <s.ServiceIcon>
                 <Icon size="32px" weight="fill" color="var(--hof-colors-red)" />
               </s.ServiceIcon>
-              <NextLink href={serviceData.servicePageUrl ?? ' '}>
+              <s.ServiceTitle>{serviceData.title}</s.ServiceTitle>
+              {/* <NextLink href={serviceData.servicePageUrl ?? ' '}>
                 <s.ServiceTitle>{serviceData.title}</s.ServiceTitle>
-              </NextLink>
+              </NextLink> */}
               <s.ServiceDetails>{serviceData.description}</s.ServiceDetails>
             </s.ServiceCard>
           );

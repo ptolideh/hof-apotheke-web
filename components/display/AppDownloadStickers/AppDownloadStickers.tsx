@@ -10,18 +10,22 @@ export const AppDownloadStickers = () => (
     spacing="var(--s-24)"
     sx={{
       label: 'AppDownloadStickers',
-      mt: 'var(--s-32)'
+      mt: 'var(--s-32)',
     }}
   >
-    <NextLink data-testId="appStore" href="/">
-      <a>
-        <NextImage src={AppStore} />
-      </a>
-    </NextLink>
-    <NextLink data-testId="playStore" href="/">
-      <a>
-        <NextImage src={PlayStore} />
-      </a>
-    </NextLink>
+    <a
+      href="https://play.google.com/store/apps/details?id=de.gesund.app"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <NextImage src={AppStore} />
+    </a>
+    <a
+      href="https://apps.apple.com/us/app/gesund-de/id1554260352"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <NextImage src={AppStore} />
+    </a>
   </HStack>
 );

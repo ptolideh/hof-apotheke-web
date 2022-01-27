@@ -6,7 +6,7 @@ export const HeadingWrapper = styled.div({
   width: '100%',
   backgroundColor: 'var(--hof-colors-blue-lighter)',
   paddingBottom: 'var(--s-48)',
-  textAlign: 'center'
+  textAlign: 'center',
 });
 
 export const SectionWrapper = styled.section({
@@ -14,7 +14,7 @@ export const SectionWrapper = styled.section({
   display: 'flex',
   width: '100%',
   padding: 'var(--s-64) 0',
-  boxShadow: 'inset 0px 0px 40px hsl(216, 30%, 31%, 0.3)'
+  boxShadow: 'inset 0px 0px 40px hsl(216, 30%, 31%, 0.3)',
 });
 
 export const BgImageWrapper = styled.div({
@@ -37,15 +37,15 @@ export const BgImageWrapper = styled.div({
     '-webkit-filter': 'blur(3px)',
     'img': {
       objectFit: 'cover',
-      objectPosition: 'center'
-    }
-  }
+      objectPosition: 'center',
+    },
+  },
 });
 
 export const DottedBoxSX = {
   position: 'absolute',
   top: '80%',
-  width: ['var(--s-256)']
+  width: ['var(--s-256)'],
 } as any;
 
 export const ServicesContainer = styled.div(
@@ -56,12 +56,12 @@ export const ServicesContainer = styled.div(
     gap: 'var(--s-12)',
     borderRadius: 'var(--chakra-radii-2xl)',
     _tabletAndUp: {
-      gap: 'var(--s-24)'
+      gap: 'var(--s-24)',
     },
     _tabletLargeAndUp: {
-      gridTemplateColumns: 'repeat(auto-fit, minmax(min(352px, 100%), 1fr))'
-    }
-  })
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(352px, 100%), 1fr))',
+    },
+  }),
 );
 
 export const ServiceCard = (p: BoxProps) => (
@@ -77,8 +77,8 @@ export const ServiceCard = (p: BoxProps) => (
     borderBottom="4px solid var(--hof-colors-red)"
     sx={{
       ':hover': {
-        transform: 'translateY(-4px)'
-      }
+        transform: 'translateY(-4px)',
+      },
     }}
     {...p}
   />

@@ -6,7 +6,7 @@ import {
   Stack,
   VStack,
   Heading,
-  SimpleGrid
+  SimpleGrid,
 } from '@chakra-ui/react';
 import { VariantType, StoreInfoItem } from '../../display/StoreInfo';
 import { Paper } from '../../layout/Paper';
@@ -48,7 +48,7 @@ const StoreInfoHeaderCard = (/* props: StoreInfoHeaderCardType */) => {
       const lastDay = capitalizer(hVal.days[hVal.days.length - 1]);
       acc.push({
         timeline: `${firstDay} - ${lastDay}`,
-        hours: `${hVal.start} - ${hVal.end}`
+        hours: `${hVal.start} - ${hVal.end}`,
       });
       return acc;
     }, []);
@@ -57,7 +57,7 @@ const StoreInfoHeaderCard = (/* props: StoreInfoHeaderCardType */) => {
   const todayHours = useMemo(() => {
     const today = spacetime.now().goto('berlin').format('day').toLowerCase();
     const todayHoursOfOperation = storeInfo.hoursOfOperation?.find((val: any) =>
-      val.days?.includes(today)
+      val.days?.includes(today),
     );
     const t = todayHoursOfOperation;
     return `${t.start} - ${t.end}`;
@@ -98,11 +98,17 @@ const StoreInfoHeaderCard = (/* props: StoreInfoHeaderCardType */) => {
           </StoreInfoItem>
         )}
         <Box>
-          <StoreInfoItem variant="hours" mb={['var(--s-16)']}>
-            Today:
-            <Box as="span" ml={2}>
-              {todayHours}
+          <StoreInfoItem variant="hours" mb={['var(--s-16)']} href={mapUrl}>
+            <Box
+              as="span"
+              sx={{
+                borderBottom: '1px solid var(--hof-colors-blue)',
+                fontStyle: 'none',
+              }}
+            >
+              Today
             </Box>
+            &nbsp; Pharmacy Hours
           </StoreInfoItem>
           <VStack data-cl="ScheduleList" align="start" spacing="16px">
             {scheduleList.map((scheduleItem: Schedule) => (
@@ -126,7 +132,7 @@ const StoreInfoHeaderCard = (/* props: StoreInfoHeaderCardType */) => {
 
 const styles = {
   CardWrapper: {
-    '--px': ['var(--s-24)', 'var(--s-32)'],
+    '--px': ['var(--s-8)', null, 'var(--s-32)'],
     '--py': 'var(--s-32)',
     width: '100%',
     mx: 'auto',
@@ -140,20 +146,22 @@ const styles = {
       'var(--lg-card-radii)',
       null,
       null,
-      'var(--lg-card-radii) var(--sm-card-radii) var(--lg-card-radii) var(--lg-card-radii)'
-    ]
+      'var(--lg-card-radii) var(--sm-card-radii) var(--lg-card-radii) var(--lg-card-radii)',
+    ],
   },
   Heading: {
     position: 'relative',
     zIndex: '1',
-    width: ['100%', null, null, 'fit-content'],
+    width: 'auto',
+    minWidth: '100%',
     fontWeight: 'var(--weight-heavy)',
     marginBottom: 'var(--s-32)',
     marginLeft: 'calc(-1 * var(--px))',
-    px: 'var(--px)',
+    marginRight: ['calc(-1 * var(--px))', null, 0],
+    px: ['calc(var(--px) + 8px)', 'var(--px)'],
     paddingTop: 'var(--py)',
     paddingBottom: 'var(--py)',
-    borderRadius: '0 0 24px 0',
+    borderRadius: [null, null, '0 0 24px 0'],
     marginTop: 'calc(-1 * var(--py))',
     backgroundColor: 'hsl(0, 0%, 96%)',
     color: 'hsl(0, 0%, 30%)',
@@ -162,19 +170,20 @@ const styles = {
 
     '& span': {
       display: ['block', 'inline-block'],
-      marginLeft: [0, 'var(--s-8)', null, 0] // margin for linline mode
+      marginLeft: [0, 'var(--s-8)', null, 0], // margin for linline mode
     },
     //
     '& .ATF-Heading-Name': {
-      width: 'max-content',
+      display: 'block',
+      width: ['fit-content'],
       color: 'hsl(0, 0%, 5%)',
       fontSize: ['1.3em', '1.2em', null, '1.5em'],
       marginTop: [0, 0, 0, 'var(--s-8)'],
       //
       'strong': {
-        color: 'var(--hof-colors-red)'
-      }
-    }
+        color: 'var(--hof-colors-red)',
+      },
+    },
   },
   Schedule: {
     flexDirection: 'column',
@@ -182,10 +191,13 @@ const styles = {
     //
     '.Schedule-days': {
       marginBottom: 'var(--s-4)',
-      color: 'var(--hof-colors-blue)',
-      fontWeight: 'var(--weight-semibold)'
-    }
-  }
+      color: 'var(--chakra-colors-gray-800)',
+      fontWeight: 600,
+    },
+    '.Schedule-hours': {
+      fontSize: '1.1rem',
+    },
+  },
 };
 
 //////

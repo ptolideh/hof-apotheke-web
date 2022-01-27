@@ -4,7 +4,7 @@ import {
   EnvelopeSimple,
   MapPin,
   PhoneCall,
-  Printer
+  Printer,
 } from 'phosphor-react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 
@@ -13,20 +13,20 @@ import { Box, BoxProps } from '@chakra-ui/react';
 // CONSTANTS
 const INFO_VARIANTS = {
   address: {
-    icon: MapPin
+    icon: MapPin,
   },
   email: {
-    icon: EnvelopeSimple
+    icon: EnvelopeSimple,
   },
   phone: {
-    icon: PhoneCall
+    icon: PhoneCall,
   },
   fax: {
-    icon: Printer
+    icon: Printer,
   },
   hours: {
-    icon: Clock
-  }
+    icon: Clock,
+  },
 };
 
 // TYPES
@@ -56,7 +56,7 @@ const StoreInfoItem = (props: StoreInfoItemType) => {
     as: 'a',
     href,
     target: '_blank',
-    rel: 'noreferrer'
+    rel: 'noreferrer',
   } as const;
 
   return (
@@ -68,7 +68,7 @@ const StoreInfoItem = (props: StoreInfoItemType) => {
       borderRadius="8px"
       _hover={{
         cursor: href ? 'pointer' : 'default',
-        bgColor: href ? 'hsl(0, 0%, 92%)' : 'white'
+        bgColor: href ? 'hsl(0, 0%, 95%)' : 'white',
       }}
       {...delegatedProps}
     >
@@ -80,7 +80,11 @@ const StoreInfoItem = (props: StoreInfoItemType) => {
         color={color}
         aria-hidden={true}
       />
-      <span className="StoreInfoItem-text">{children}</span>
+      <span
+        className={`StoreInfoItem-text ${href ? 'link' : ''}`} //
+      >
+        {children}
+      </span>
     </Wrapper>
   );
 };
@@ -102,11 +106,26 @@ const Wrapper = styled(Box)`
     font-weight: var(--weight-semibold);
     font-size: var(--text-16);
     margin-left: var(--s-16);
-    flex: 1;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+    width: fit-content;
+  }
+
+  .StoreInfoItem-text.link {
+    color: hsl(208, 99%, 30%);
+  }
+
+  .StoreInfoItem-text.link::after {
+    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+    margin-left: 12px;
+  }
+
+  &:hover {
+    .StoreInfoItem-text.link::after {
+      opacity: 0.5;
+    }
   }
 `;
 

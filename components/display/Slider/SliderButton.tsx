@@ -8,7 +8,7 @@ import {
   MenuItem,
   Button,
   IconButton,
-  IconButtonProps
+  IconButtonProps,
 } from '@chakra-ui/react';
 
 import { HALink } from '../../navigation/HA_Link';
@@ -34,7 +34,7 @@ const SliderButton = (props: SliderButtonProps) => {
 
   const Icon = useMemo(
     () => (goTo === 'next' ? CaretRight : CaretLeft),
-    [goTo]
+    [goTo],
   );
 
   return (
@@ -42,7 +42,7 @@ const SliderButton = (props: SliderButtonProps) => {
       onClick={handleClick}
       colorScheme="transparent"
       color="gray.500"
-      size="sm"
+      // size="lg"
       borderRadius="50%"
       {...delegatedProps}
       icon={<Icon color="currentColor" weight="bold" size={iconSize} />}
