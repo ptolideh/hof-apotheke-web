@@ -22,12 +22,12 @@ export const PaperSection = ({
         backgroundColor: 'white',
         borderRadius: 'var(--chakra-radii-3xl)',
         padding: 'var(--s-32)',
-        marginTop: overTheFold ? 'calc(-1 * var(--s-64))' : 0,
-        boxShadow: getShadow(shadowSpread)
+        marginTop: overTheFold ? '-64px' : '24px',
+        boxShadow: getShadow(shadowSpread),
       },
       tabletLargeAndUp: {
-        padding: 'var(--s-48)'
-      }
+        padding: 'var(--s-48)',
+      },
     })}
     {...delegatedProps}
   >

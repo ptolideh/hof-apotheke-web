@@ -41,7 +41,10 @@ export const AboutUsPage = () => {
       <SectionWrapper
         style={{ backgroundColor: 'var(--hof-colors-blue-lighter)' }}
       >
-        <PaperSection mb={['var(--s-96)', null, null, 'var(--s-128)']}>
+        <PaperSection
+          overTheFold
+          mb={['var(--s-96)', null, null, 'var(--s-128)']}
+        >
           {/* <RichTextContainer content={serviceDescription} /> */}
           <p>
             cheese cheesecheese cheese cheesecheese cheese cheese cheesecheese

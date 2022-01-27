@@ -43,10 +43,10 @@ export const DeliveryServicePage = (props: any) => {
         textAlign={['left', null, 'center']}
         style={{
           backgroundColor: 'var(--hof-colors-blue-lighter)',
-          paddingBottom: 'var(--s-72)'
+          paddingBottom: 'var(--s-72)',
         }}
       >
-        <PaperSection>
+        <PaperSection overTheFold>
           <RichTextContainer content={serviceDescription} />
           <ContactButton />
         </PaperSection>
@@ -56,7 +56,7 @@ export const DeliveryServicePage = (props: any) => {
       <SectionWrapper
         style={{
           backgroundColor: 'var(--hof-colors-blue-lighter)',
-          paddingBottom: 'var(--s-128)'
+          paddingBottom: 'var(--s-128)',
         }}
       >
         <DetailsSectionText content={serviceDetails} />
@@ -76,14 +76,14 @@ const DetailsSectionText = (props: { content: any }) => (
           display: 'block',
           fontSize: 'var(--text-24)',
           textAlign: 'left',
-          color: 'var(--chakra-colors-gray-800)'
-        }
+          color: 'var(--chakra-colors-gray-800)',
+        },
       },
       tabletLargeAndUp: {
         'p > b': {
-          textAlign: 'center'
-        }
-      }
+          textAlign: 'center',
+        },
+      },
     })}
   >
     <RichTextContainer content={props.content} />
@@ -95,7 +95,7 @@ const ContactButton = (props: any) => (
     sx={{
       label: 'ContactButton_Wrapper',
       textAlign: 'center',
-      paddingBottom: 'var(--s-16)'
+      paddingBottom: 'var(--s-16)',
     }}
   >
     <NextLink href="/kontakt">
@@ -113,8 +113,8 @@ const ContactButton = (props: any) => (
 
             '&:hover': {
               backgroundColor: 'hsl(1, 68%, 45%)',
-              boxShadow: '0 2px 4px -1px hsl(1, 67%, 49%)'
-            }
+              boxShadow: '0 2px 4px -1px hsl(1, 67%, 49%)',
+            },
           }}
         >
           Kontakt
