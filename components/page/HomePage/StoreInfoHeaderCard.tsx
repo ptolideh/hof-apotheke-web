@@ -1,69 +1,21 @@
-import { useMemo } from 'react';
-import spacetime from 'spacetime';
-import {
-  Box,
-  Flex,
-  Stack,
-  VStack,
-  Heading,
-  SimpleGrid,
-} from '@chakra-ui/react';
-import { VariantType, StoreInfoItem } from '../../display/StoreInfo';
+import { Heading, SimpleGrid } from '@chakra-ui/react';
+import { HoursList, ContactInfoList } from '../../display/StoreInfo';
 import { Paper } from '../../layout/Paper';
 import { useHomeContent } from '../../../context/content/HomePageContent';
-import { capitalizer, removeAllWhiteSpace } from '../../../utils';
-
-// TYPES
-// type InfoType = {
-//   [key in VariantType]?: string;
-// };
-// type InfoEntriesType = [VariantType, string][];
-
-type Schedule = { timeline: string; hours: string };
-
-// CONSTANTS
-// const info: InfoType = {
-//   address: 'Louisenstr. 5561348 Bad Homburg',
-//   email: 'info@hofapotheke.com',
-//   phone: '06172 92420',
-//   fax: '06172 924292'
-// };
-
-// const hours = {
-//   weekday: '08:00 - 18:30',
-//   weekend: '09:00 - 16:00'
-// };
 
 const StoreInfoHeaderCard = (/* props: StoreInfoHeaderCardType */) => {
   const { main, storeInfo } = useHomeContent();
   const { pageHeading } = main ?? {};
-  const { address, mapUrl, phone, fax, email } = storeInfo;
 
   // const infoEntries = Object.entries(info) as InfoEntriesType;
-
-  const scheduleList = useMemo(() => {
-    type AccType = Schedule[];
-    return storeInfo.hoursOfOperation.reduce((acc: AccType, hVal: any) => {
-      const firstDay = capitalizer(hVal.days[0]);
-      const lastDay = capitalizer(hVal.days[hVal.days.length - 1]);
-      acc.push({
-        timeline: `${firstDay} - ${lastDay}`,
-        hours: `${hVal.start} - ${hVal.end}`,
-      });
-      return acc;
-    }, []);
-  }, [storeInfo]);
-
-  const todayHours = useMemo(() => {
-    const today = spacetime.now().goto('berlin').format('day').toLowerCase();
-    const todayHoursOfOperation = storeInfo.hoursOfOperation?.find((val: any) =>
-      val.days?.includes(today),
-    );
-    const t = todayHoursOfOperation;
-    return `${t.start} - ${t.end}`;
-  }, [storeInfo]);
-
-  console.log('EMAIL -->>>>', email);
+  // const todayHours = useMemo(() => {
+  //   const today = spacetime.now().goto('berlin').format('day').toLowerCase();
+  //   const todayHoursOfOperation = storeInfo.hoursOfOperation?.find((val: any) =>
+  //     val.days?.includes(today),
+  //   );
+  //   const t = todayHoursOfOperation;
+  //   return `${t.start} - ${t.end}`;
+  // }, [storeInfo]);
 
   return (
     <Paper className="ATF-StoreInfoCard-Wrapper" sx={styles.CardWrapper}>
@@ -74,55 +26,8 @@ const StoreInfoHeaderCard = (/* props: StoreInfoHeaderCardType */) => {
         </span>
       </Heading>
       <SimpleGrid spacing="4px" columns={[1, 2, null, 1]}>
-        {address && (
-          <StoreInfoItem variant="address" href={mapUrl}>
-            {address}
-          </StoreInfoItem>
-        )}
-        {email && (
-          <StoreInfoItem variant="email" href={`mailto:${email.trim()}}`}>
-            {email}
-          </StoreInfoItem>
-        )}
-        {phone && (
-          <StoreInfoItem
-            variant="phone"
-            href={`tel:${removeAllWhiteSpace(phone)}`}
-          >
-            {phone}
-          </StoreInfoItem>
-        )}
-        {fax && (
-          <StoreInfoItem variant="fax" href={`fax:${removeAllWhiteSpace(fax)}`}>
-            {fax}
-          </StoreInfoItem>
-        )}
-        <Box>
-          <StoreInfoItem variant="hours" mb={['var(--s-16)']} href={mapUrl}>
-            <Box
-              as="span"
-              sx={{
-                borderBottom: '1px solid var(--hof-colors-blue)',
-                fontStyle: 'none',
-              }}
-            >
-              Today
-            </Box>
-            &nbsp; Pharmacy Hours
-          </StoreInfoItem>
-          <VStack data-cl="ScheduleList" align="start" spacing="16px">
-            {scheduleList.map((scheduleItem: Schedule) => (
-              <Flex
-                key={encodeURIComponent(scheduleItem.timeline)}
-                className="Schedule"
-                sx={styles.Schedule}
-              >
-                <span className="Schedule-days">{scheduleItem.timeline}</span>
-                <span className="Schedule-hours">{scheduleItem.hours}</span>
-              </Flex>
-            ))}
-          </VStack>
-        </Box>
+        <ContactInfoList storeInfo={storeInfo} />
+        <HoursList storeInfo={storeInfo} />
       </SimpleGrid>
     </Paper>
   );

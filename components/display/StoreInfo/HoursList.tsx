@@ -1,63 +1,72 @@
 import { useMemo } from 'react';
-import spacetime from 'spacetime';
-import { Box, Stack, VStack, Text } from '@chakra-ui/react';
+import { Box, Stack, VStack, Text, Flex } from '@chakra-ui/react';
 
 import { StoreInfoItem, VariantType } from './StoreInfoItem';
-import styled from '@emotion/styled';
+import { capitalizer } from '../../../utils';
+import { useHomeContent } from '../../../context/content/HomePageContent';
 
 // TYPES ///////////////////////////////
 
-type InfoType = {
-  [key in VariantType]?: string;
-};
-type InfoEntriesType = [VariantType, string][];
-
-// CONSTANTS //////////////////////////
-
-const hours = {
-  weekday: '08:00 - 18:30',
-  weekend: '09:00 - 16:00'
-};
+type Schedule = { timeline: string; hours: string };
 
 // COMPONENT -------------------------
 
-const HoursList = () => {
-  const todayHours = useMemo(() => {
-    const today = spacetime.now().goto('berlin').format('day');
-    const weekdays = /monday|tuesday|wednesday|thursday|friday/gim;
-    return today.match(weekdays) ? hours.weekday : hours.weekend;
-  }, []);
+const HoursList = ({ storeInfo }: any) => {
+  const { mapUrl } = storeInfo;
+
+  const scheduleList = useMemo(() => {
+    type AccType = Schedule[];
+    return storeInfo.hoursOfOperation.reduce((acc: AccType, hVal: any) => {
+      const firstDay = capitalizer(hVal.days[0]);
+      const lastDay = capitalizer(hVal.days[hVal.days.length - 1]);
+      acc.push({
+        timeline: `${firstDay} - ${lastDay}`,
+        hours: `${hVal.start} - ${hVal.end}`,
+      });
+      return acc;
+    }, []);
+  }, [storeInfo]);
 
   return (
-    <Stack direction="column" spacing="var(--s-12)">
-      <StoreInfoItem variant="hours">
-        Today:
-        <Box as="span" ml={2}>
-          {todayHours}
+    <Box width="100%">
+      <StoreInfoItem variant="hours" mb={['var(--s-16)']} href={mapUrl}>
+        <Box
+          as="span"
+          sx={{
+            borderBottom: '1px solid var(--hof-colors-blue)',
+            fontStyle: 'none',
+          }}
+        >
+          Today
         </Box>
+        &nbsp; Pharmacy Hours
       </StoreInfoItem>
-      <DailyScheduleStack>
-        <ScheduleDays>Monday - Friday</ScheduleDays>
-        <Text as="span">{hours.weekday}</Text>
-      </DailyScheduleStack>
-      <DailyScheduleStack mt="16px !important">
-        <ScheduleDays>Saturday - Sunday</ScheduleDays>
-        <Text as="span">{hours.weekend}</Text>
-      </DailyScheduleStack>
-    </Stack>
+      <VStack data-cl="ScheduleList" align="start" spacing="16px">
+        {scheduleList.map((scheduleItem: Schedule) => (
+          <Flex
+            key={encodeURIComponent(scheduleItem.timeline)}
+            className="Schedule"
+            sx={{
+              flexDirection: 'column',
+              paddingLeft: 'var(--s-48)',
+              //
+              '.Schedule-days': {
+                marginBottom: 'var(--s-4)',
+                color: 'var(--chakra-colors-gray-800)',
+                fontWeight: 600,
+              },
+              '.Schedule-hours': {
+                fontSize: '1.1rem',
+              },
+            }}
+          >
+            <span className="Schedule-days">{scheduleItem.timeline}</span>
+            <span className="Schedule-hours">{scheduleItem.hours}</span>
+          </Flex>
+        ))}
+      </VStack>
+    </Box>
   );
 };
-
-// STYLES ////////////////////////////
-
-const DailyScheduleStack = styled(VStack)({
-  paddingLeft: 'var(--s-48)',
-  alignItems: 'flex-start'
-});
-
-const ScheduleDays = styled('span')({
-  color: 'var(--hof-colors-blue)',
-  fontWeight: 600
-});
 
 export { HoursList };

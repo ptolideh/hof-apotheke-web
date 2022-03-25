@@ -92,7 +92,8 @@ export const SlideTitle = styled.h3(
     fontWeight: 'var(--weight-semibold)',
     marginBottom: 'var(--s-16)',
     '&:hover': {
-      textDecoration: 'underline',
+      // TEMP_LANDING_PAGE
+      // textDecoration: 'underline',
     },
     _tabletLargeAndUp: {
       fontSize: '1.75rem',

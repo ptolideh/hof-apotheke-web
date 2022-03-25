@@ -49,8 +49,9 @@ const Header = (props: any) => {
           <HALink href="/">
             <SVGWrapper id="logo" component={Logo} sx={styles.logo} />
           </HALink>
-          <DesktopNav navItems={navItems} />
-          <MobileNav navItems={navItems} />
+          {/* TEMP_LANDING_PAGE */}
+          {/* <DesktopNav navItems={navItems} /> */}
+          {/* <MobileNav navItems={navItems} /> */}
         </HStack>
       </VStack>
 

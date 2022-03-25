@@ -1,4 +1,3 @@
-// pages/api/note/index.js
 import nc from 'next-connect';
 import { getEntries } from '../../store';
 

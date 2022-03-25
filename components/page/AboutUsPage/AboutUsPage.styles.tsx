@@ -33,29 +33,38 @@ export const History_Section = styled.div(
   }),
 );
 
-export const History_ImageCol = styled.figure({
-  position: 'relative',
-  display: 'block',
-  overflow: 'hidden',
-  borderRadius: '24px',
-  marginRight: '32px',
-  flex: '1 0 100%',
-  maxWidth: '375px',
-  aspectRatio: '6 / 4',
-  '@supports not (aspect-ratio: 6 / 4)': {
-    height: '250px',
-  },
+export const History_ImageCol = styled.figure(
+  mq({
+    position: 'relative',
+    display: 'block',
+    flex: '1 0 100%',
+    maxWidth: '375px',
+    marginBottom: '40px',
+    overflow: 'hidden',
+    borderRadius: '24px',
+    aspectRatio: '6 / 4',
+    '@supports not (aspect-ratio: 6 / 4)': {
+      height: '250px',
+    },
 
-  '& img': {
-    objectFit: 'cover',
-  },
-});
+    '& img': {
+      objectFit: 'cover',
+    },
+
+    _laptopAndUp: {
+      marginBottom: 0,
+      marginRight: '32px',
+    },
+  }),
+);
 
 export const History_DetailsCol = styled.p({
   flex: 1,
   minWidth: '50%',
   display: 'flex',
   flexDirection: 'column',
+  fontSize: '1.125rem',
+  lineHeight: '1.6',
   'span': {
     display: 'inline-flex',
     alignItems: 'center',
@@ -84,12 +93,22 @@ export const History_DetailsCol = styled.p({
  * TEAM SECTION
  */
 
+export const TeamSectionSubtitle = styled.p`
+  width: min(100%, 900px);
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 80px;
+  font-size: 1.125rem;
+  line-height: 1.6;
+`;
+
 export const TeamMembers_Grid = (props: SimpleGridProps) => (
   <SimpleGrid
     className="TeamMembers_Grid"
     minChildWidth="240px"
     spacing="24px"
     mx={[null, null, '32px', null]}
+    mb="128px"
     {...props}
   />
 );
@@ -113,8 +132,8 @@ export const TeamMemberCard_OuterBox = styled.div(
 export const TeamMemberCard_Bio = styled.span(
   mq({
     fontWeight: 400,
-    fontSize: '1.05rem',
-    lineHeight: '1.2',
+    fontSize: '0.95rem',
+    lineHeight: '1.5',
     color: 'var(--chakra-colors-gray-700)',
     _tabletLargeAndUp: {
       height: 0,
@@ -163,17 +182,17 @@ export const TeamMemberCard_InnerStack = (props: BoxProps) => (
   />
 );
 
-export const TeamMemberCard_Image = styled.figure({
+export const TeamMemberCard_BaseImage = styled.figure({
   display: 'flex',
   position: 'relative',
   top: -16,
   justifyContent: 'center',
+  alignItems: 'center',
   flexShrink: 0,
   width: '100%',
   maxWidth: '125px',
   borderRadius: '100%',
   overflow: 'hidden',
-
   aspectRatio: '1 / 1',
   '@supports not (aspect-ratio: 1 / 1)': {
     height: '100%',
@@ -187,7 +206,18 @@ export const TeamMemberCard_Image = styled.figure({
       clear: 'both',
     },
   },
+});
 
+export const TeamMemberCard_PlaceholderImage = styled(TeamMemberCard_BaseImage)(
+  {
+    backgroundColor: 'var(--hof-colors-blue)',
+    fontSize: '3rem',
+    fontWeight: 'bold',
+    color: 'white',
+  },
+);
+
+export const TeamMemberCard_Photo = styled(TeamMemberCard_BaseImage)({
   /* NextJS image fixes */
   '& > div': {
     height: '100%',

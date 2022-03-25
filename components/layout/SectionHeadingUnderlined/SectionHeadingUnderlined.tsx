@@ -30,6 +30,7 @@ const S_Title = ({ sx, ...resProps }: HeadingProps) => (
     sx={{
       position: 'relative',
       lineHeight: '1.4',
+      textAlign: 'center',
       '::after': {
         position: 'absolute',
         bottom: '-0.4em',

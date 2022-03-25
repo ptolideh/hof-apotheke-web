@@ -4,9 +4,7 @@ import NextImage, { ImageProps as NextImageProps } from 'next/image';
 
 import { Box, Heading, VStack, Grid, GridItem, Flex } from '@chakra-ui/react';
 
-import CareAidsHeroImage from '../../../public/images/services/careaids.jpeg';
-import MedProcurementImage from '../../../public/images/services/medicine-procurement.png';
-import RscProcurementImage from '../../../public/images/services/resource-procurement.png';
+import RentalHeroImage from '../../../public/images/services/rental.jpg';
 import { PageWithHero } from '../../layout/PageWithHero';
 import { FixedHeroImg } from '../../layout/FixedHeroImage';
 import { TitleUnderlined } from '../../layout/TitleUnderlined';
@@ -16,17 +14,16 @@ import { PaperSection } from '../../layout/PaperSection';
 import { SectionWrapper } from '../../layout/SectionWrapper';
 
 import { RichTextContainer } from '../../display/RichTextContainer';
-import { AppDownloadStickers } from '../../display/AppDownloadStickers';
-import styled from '@emotion/styled';
+import { ContactButton } from '../../navigation/ContactButton';
 
 export const RentalPage = (props: any) => {
   const { content } = props;
-  console.log(content);
+  console.log('rental -->', content);
 
   const {
     pageTitle,
     pageSubtitle,
-    type
+    type,
     // serviceDescription,
     // stepOneTitle,
     // stepOneDescription,
@@ -40,26 +37,41 @@ export const RentalPage = (props: any) => {
     <PageWithHero style={{ backgroundColor: 'var(--hof-colors-blue-lighter)' }}>
       {/* SECTION: ABTF */}
       <FixedHeroImg
-        imageSrc={CareAidsHeroImage}
+        imageSrc={RentalHeroImage}
         imagePosition="center top"
         blur={true}
       >
-        <TitleUnderlined title={'`pageTitle`'} subtitle={'`pageSubtitle`'} />
+        <TitleUnderlined title={pageTitle} subtitle={pageSubtitle} />
       </FixedHeroImg>
-      <SectionWrapper bgColor="var(--hof-colors-blue-lighter)">
-        <RichTextContainer content={content.introSection} py="var(--s-40)" />
+      <SectionWrapper maxWidth="sm" bgColor="var(--hof-colors-blue-lighter)">
+        <RichTextContainer
+          content={content.introSection}
+          py="var(--s-40)"
+          w="min(100%, 900px)"
+          mx="auto"
+          textAlign="center"
+        />
+        <Flex justifyContent="center" w="100%" mt="-24px" pb="24px">
+          <ContactButton />
+        </Flex>
       </SectionWrapper>
+
       <SectionWrapper maxWidth="md" bgColor="var(--hof-colors-blue-lighter)">
         <MediaBlock_List>
-          {content.type?.map((aidType: any) => (
-            <PaperSection key={aidType.sys.id} shadowSpread="sm">
+          {content.type?.map((rentalType: any) => (
+            <PaperSection key={rentalType.sys.id} shadowSpread="sm">
               <MediaBlock_Row>
                 <MediaBlock_ImageCol
-                  img={'https:' + aidType.fields.image.fields.file.url}
+                  img={'https:' + rentalType.fields.image.fields.file.url}
                 />
                 <MediaBlock_DetailsCol
-                  heading={aidType.fields.title}
-                  content={aidType.fields.description}
+                  heading={rentalType.fields.title}
+                  content={rentalType.fields.description}
+                  fees={{
+                    rent: rentalType.fields.rentalFee,
+                    deposit: rentalType.fields.deposit,
+                    period: rentalType.fields.time,
+                  }}
                 />
               </MediaBlock_Row>
             </PaperSection>
@@ -75,7 +87,7 @@ export const RentalPage = (props: any) => {
 const MediaBlock_List = (p: { children: any }) => (
   <VStack
     id="MediaBlock_List"
-    spacing="var(--s-96)"
+    spacing="64px"
     position="relative"
     mb="var(--s-128)"
   >
@@ -90,12 +102,12 @@ const MediaBlock_Row = (p: { reverse?: boolean; children: any }) => (
       mobileAndUp: {
         gap: 'var(--s-48)',
         width: '100%',
-        flexDirection: 'column'
+        flexDirection: 'column',
       },
       tabletLargeAndUp: {
         alignItems: 'flex-start',
-        flexDirection: p.reverse ? 'row-reverse' : 'row'
-      }
+        flexDirection: p.reverse ? 'row-reverse' : 'row',
+      },
     })}
   >
     {p.children}
@@ -112,35 +124,47 @@ const MediaBlock_ImageCol = (p: {
       mobileAndUp: {
         position: 'relative',
         justifyContent: 'center',
-        flex: '1 10 100%',
-        maxWidth: '400px',
         borderRadius: '40px 4px 40px 4px',
         overflow: 'hidden',
 
-        aspectRatio: '1 / 1',
-        '@supports not (aspect-ratio: 1 / 1)': {
-          '&::before': {
-            float: 'left',
-            pt: '100%',
-            content: '""'
-          },
-          '&::after': {
-            display: 'block',
-            content: '""',
-            clear: 'both'
-          }
+        aspectRatio: '6 / 3',
+        '@supports not (aspect-ratio: 6 / 3)': {
+          height: '100vh',
+          maxHeight: '250px',
         },
 
         /* NextJS image fixes */
         '& > div': {
           height: '100%',
-          maxHeight: '100%'
+          maxHeight: '100%',
+          minHeight: '100%',
         },
         '& img': {
           objectFit: 'cover',
-          objectPosition: 'center'
-        }
-      }
+          objectPosition: 'center 20%',
+        },
+      },
+      tabletLargeAndUp: {
+        justifyContent: 'center',
+        flex: '1 10 100%',
+        maxWidth: '320px',
+
+        aspectRatio: '1 / 1',
+        '@supports not (aspect-ratio: 1 / 1)': {
+          height: 'revert',
+          maxHeight: 'revert',
+          '&::before': {
+            float: 'left',
+            pt: '100%',
+            content: '""',
+          },
+          '&::after': {
+            display: 'block',
+            content: '""',
+            clear: 'both',
+          },
+        },
+      },
     })}
   >
     <NextImage src={p.img} layout="fill" />
@@ -151,6 +175,7 @@ const MediaBlock_DetailsCol = (p: {
   reverse?: boolean;
   heading: string;
   content: any;
+  fees: { rent: number; deposit: number; period: string };
 }) => (
   <Flex
     flexDirection="column"
@@ -159,9 +184,9 @@ const MediaBlock_DetailsCol = (p: {
       mobileAndUp: {
         // border: '1px solid green',
         flex: '1',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
       },
-      laptopAndUp: {}
+      laptopAndUp: {},
     })}
   >
     {/* Title */}
@@ -171,7 +196,7 @@ const MediaBlock_DetailsCol = (p: {
       sx={{
         display: 'flex',
         alignItems: 'flex-start',
-        marginBottom: 'var(--s-24)'
+        marginBottom: 'var(--s-24)',
       }}
     >
       <Box
@@ -204,11 +229,26 @@ const MediaBlock_DetailsCol = (p: {
       color="var(--chakra-colors-gray-800)"
       sx={{
         'b': {
-          color: 'var(--hof-colors-red)'
-        }
+          color: 'var(--hof-colors-red)',
+        },
       }}
     >
       <RichTextContainer content={p.content} />
+
+      {/* Fees */}
+      <Box
+        className="rental-fees"
+        fontWeight="bold"
+        color="gray.700"
+        mt="-16px"
+        fontSize="1.1em"
+        lineHeight="2"
+      >
+        <div>
+          €{p.fees.rent} / {p.fees.period}{' '}
+        </div>
+        <div>€{p.fees.deposit} deposit </div>
+      </Box>
     </Box>
   </Flex>
 );

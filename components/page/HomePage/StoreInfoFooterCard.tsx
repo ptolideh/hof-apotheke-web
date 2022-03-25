@@ -37,7 +37,13 @@ const StoreInfoFooterCard = (/* props: StoreInfoFooterCardType */) => {
     color: 'var(--hof-colors-blue)',
   };
   return (
-    <SectionWrapper maxWidth="lg">
+    <SectionWrapper
+      maxWidth="lg"
+      // TEMP_LANDING_PAGE ↓
+      position="relative"
+      zIndex={2}
+      bgColor="transparent"
+    >
       <Paper
         p="var(--s-32)"
         boxShadow="0 4px 15px var(--hof-colors-orange)"

@@ -32,9 +32,10 @@ const AboutSection = (/* props: AboutSectionType */) => {
         </s.StoreImage>
         <s.AboutText>
           <RichTextContainer content={main.aboutSectionText.content[0]} />
-          <NextLink href="/uber-uns">
+          {/* TEMP_LANDING_PAGE */}
+          {/* <NextLink href="/uber-uns">
             <a className="learn-more">Learn more</a>
-          </NextLink>
+          </NextLink> */}
         </s.AboutText>
       </s.InnerContainer>
     </SectionWrapper>

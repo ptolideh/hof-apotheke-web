@@ -28,7 +28,7 @@ export const PreOrderPage = (props: any) => {
     stepTwoTitle,
     stepTwoDescription,
     stepThreeTitle,
-    stepThreeDescription
+    stepThreeDescription,
   } = content;
 
   return (
@@ -97,7 +97,7 @@ const ActionSteps_Container = (p: { children: any }) => (
     sx={{
       label: 'ActionSteps_Container',
       position: 'relative',
-      mb: 'var(--s-128)'
+      mb: 'var(--s-128)',
     }}
   >
     {p.children}
@@ -110,11 +110,11 @@ const ActionStep_Row = (p: { children: any }) => (
     sx={mq({
       label: 'ActionStep_Row',
       mobileAndUp: {
-        paddingBottom: 'var(--s-32)'
+        paddingBottom: 'var(--s-32)',
       },
       laptopAndUp: {
-        paddingBottom: 'var(--s-64)'
-      }
+        paddingBottom: 'var(--s-64)',
+      },
     })}
   >
     {p.children}
@@ -140,12 +140,12 @@ const ActionStepImage_Col = (p: {
       /* NextJS image fixes */
       '& > div': {
         height: '100%',
-        maxHeight: '100%'
+        maxHeight: '100%',
       },
       '& img': {
         objectFit: 'cover',
-        objectPosition: 'center'
-      }
+        objectPosition: 'center',
+      },
     }}
   >
     <NextImage src={p.img} />
@@ -167,15 +167,15 @@ const ActionStepDesc_Col = (p: {
         py: 'var(--s-40)',
         borderRadius: '12px 12px 24px 24px',
         boxShadow: '0 -4px 12px hsl(215deg 60% 80% / 40%)',
-        marginTop: '-128px',
-        zIndex: 1
+        marginTop: '-320px',
+        zIndex: 1,
       },
       laptopAndUp: {
         boxShadow: '0 1px 6px hsl(215deg 60% 80% / 40%)',
         padding: 'var(--s-40)',
         borderRadius: p.reverse ? '40px 40px 40px 4px' : '40px 40px 4px 40px',
-        marginTop: 0
-      }
+        marginTop: 0,
+      },
     })}
   >
     {/* Title */}
@@ -185,7 +185,7 @@ const ActionStepDesc_Col = (p: {
         label: 'ActionStep_Heading',
         display: 'flex',
         alignItems: 'center',
-        marginBottom: 'var(--s-24)'
+        marginBottom: 'var(--s-24)',
       }}
     >
       <Box
@@ -201,7 +201,7 @@ const ActionStepDesc_Col = (p: {
           padding: '0.1em 0',
           borderRadius: '50%',
           color: 'white',
-          marginRight: 'var(--s-20)'
+          marginRight: 'var(--s-20)',
         }}
       >
         {p.heading.num}
@@ -210,7 +210,7 @@ const ActionStepDesc_Col = (p: {
         as="span"
         sx={{
           label: 'ActionStep_Heading-Text',
-          color: 'var(--hof-colors-blue)'
+          color: 'var(--hof-colors-blue)',
         }} //
       >
         {p.heading.text}
@@ -226,8 +226,8 @@ const ActionStepDesc_Col = (p: {
         mb: 'var(--s-32)',
         color: 'var(--chakra-colors-gray-800)',
         'b': {
-          color: 'var(--hof-colors-red)'
-        }
+          color: 'var(--hof-colors-red)',
+        },
       }}
     >
       {p.children}

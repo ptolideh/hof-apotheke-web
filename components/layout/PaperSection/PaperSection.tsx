@@ -21,8 +21,10 @@ export const PaperSection = ({
         position: 'relative',
         backgroundColor: 'white',
         borderRadius: 'var(--chakra-radii-3xl)',
-        padding: 'var(--s-32)',
+        padding: '24px 18px',
         marginTop: overTheFold ? '-64px' : '24px',
+        marginLeft: '-4px',
+        marginRight: '-4px',
         boxShadow: getShadow(shadowSpread),
       },
       tabletLargeAndUp: {

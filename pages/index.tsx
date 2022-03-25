@@ -46,7 +46,8 @@ const Home: NextPage = ({ content }: any) => {
         <AboutSection />
         <PrimaryServices />
         <RegularServicesSection />
-        <OffersSlider />
+        {/* TEMP_LANDING_PAGE */}
+        {/* <OffersSlider /> */}
         <AnchorTag id="app" />
         <AppSection />
         <StoreInfoFooterCard />

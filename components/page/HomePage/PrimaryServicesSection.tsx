@@ -25,12 +25,12 @@ const icons = {
   'Pill': Pill,
   'Truck': Truck,
   'FirstAid': FirstAid,
-  'DeviceMobile': DeviceMobile
+  'DeviceMobile': DeviceMobile,
 } as any;
 
 const PrimaryServicesSection = (/* props: PrimaryServicesSectionType */) => {
   const {
-    main: { primaryServices }
+    main: { primaryServices },
   } = useHomeContent();
 
   return (
@@ -60,11 +60,13 @@ const PrimaryServicesSection = (/* props: PrimaryServicesSectionType */) => {
                   </s.ServiceIcon>
                   <s.ServiceTitle>{serviceData.title}</s.ServiceTitle>
                   <s.ServiceDetails>{serviceData.description}</s.ServiceDetails>
-                  <NextLink href={serviceData.buttonLink}>
+                  {/* TEMP_LANDING_PAGE */}
+                  {/* <NextLink href={serviceData.buttonLink}>
                     <s.ActionButton as="a" size="lg">
                       {serviceData.buttonText}
                     </s.ActionButton>
-                  </NextLink>
+                  </NextLink> */}
+                  <br />
                 </s.ServiceCard>
               );
             })}

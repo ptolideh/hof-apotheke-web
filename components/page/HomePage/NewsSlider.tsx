@@ -48,17 +48,23 @@ const NewsSlider = (/* props: NewsSliderType */) => {
                 data-testid={`${post.sys.id}-title`}
                 key={`${post.sys.id}-title`}
               >
-                <NextLink href={'/posts/' + post.fields.slug}>
+                <span>{post.fields.title}</span>
+                {/* TEMP_LANDING_PAGE */}
+                {/* <NextLink href={'/posts/' + post.fields.slug}>
                   <a>{post.fields.title}</a>
-                </NextLink>
+                </NextLink> */}
               </s.SlideTitle>
               <s.SlideText>{post.fields.summary}</s.SlideText>
-              <LearnMoreLink slug={'/posts/' + post.fields.slug} />
+              {/* TEMP_LANDING_PAGE */}
+              {/* <LearnMoreLink slug={'/posts/' + post.fields.slug} /> */}
+              <br />
+              <br />
             </s.SlideDetailsWrapper>
           </s.Slide>
         ))}
       </Slider>
-      <s.SliderFooter>
+      {/* TEMP_LANDING_PAGE */}
+      {/* <s.SliderFooter>
         <s.ButtonsWrapper>
           <SliderButton
             aria-label="Got to previous slide"
@@ -75,7 +81,7 @@ const NewsSlider = (/* props: NewsSliderType */) => {
             size="md"
           />
         </s.ButtonsWrapper>
-      </s.SliderFooter>
+      </s.SliderFooter> */}
     </s.SliderWrapper>
   );
 };

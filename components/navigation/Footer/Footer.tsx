@@ -55,6 +55,8 @@ const Footer = (props: any) => {
   return (
     <Box
       sx={{
+        label: 'Footer-root',
+        position: 'relative',
         width: '100%',
         px: '24px',
         background: 'linear-gradient(180deg, #FFFFFF 0%, #FCF7F6 43.75%)',
@@ -78,7 +80,8 @@ const Footer = (props: any) => {
             },
           })}
         />
-        {footerData.map((section: any) => (
+        {/* TEMP_LANDING_PAGE */}
+        {/* {footerData.map((section: any) => (
           <VStack
             className="FooterSection-Col"
             key={section.title}
@@ -95,7 +98,7 @@ const Footer = (props: any) => {
               {section.list2 && <LinksList list={section.list2} />}
             </Stack>
           </VStack>
-        ))}
+        ))} */}
       </Flex>
       <Flex
         position="relative"

@@ -8,7 +8,7 @@ export const FixedHeroImg = (props: any) => {
   const {
     children,
     imageSrc,
-    imagePosition = 'center top',
+    imagePosition,
     blur = false,
     ...delegatedProps
   } = props;
@@ -18,6 +18,7 @@ export const FixedHeroImg = (props: any) => {
         {...delegatedProps}
         sx={{
           '--p-blur': blur ? 'blur(3px)' : 0,
+          '--img-position': imagePosition || 'center 20%',
           ...delegatedProps.sx,
         }}
       >
@@ -25,7 +26,7 @@ export const FixedHeroImg = (props: any) => {
           src={imageSrc}
           layout="fill"
           objectFit="cover"
-          objectPosition={imagePosition}
+          // objectPosition={imagePosition}
           priority={true}
         />
         <CenterBox>{children}</CenterBox>
@@ -59,6 +60,8 @@ const ImageBox = styled(Box)(
     },
     '& img': {
       filter: 'var(--p-blur)',
+      objectFit: 'cover',
+      objectPosition: 'var(--img-position)',
     },
     _tabletLargeAndUp: {
       top: '98px', // (148 - 98) / 2

@@ -1,34 +1,45 @@
-import { Stack } from '@chakra-ui/react';
-import { StoreInfoItem, VariantType } from './StoreInfoItem';
-
-// TYPES //////////////////////
-
-type InfoType = {
-  [key in VariantType]?: string;
-};
-type InfoEntriesType = [VariantType, string][];
-
-// CONSTANTS ///////////////////
-
-const info: InfoType = {
-  address: 'Louisenstr. 5561348 Bad Homburg',
-  email: 'info@hofapotheke.com',
-  phone: '06172 92420',
-  fax: '06172 924292'
-};
+import { removeAllWhiteSpace } from '../../../utils';
+import { StoreInfoItem } from './StoreInfoItem';
 
 // COMPONENT
 
-const ContactInfoList = () => {
-  const infoEntries = Object.entries(info) as InfoEntriesType;
+const ContactInfoList = (props: { storeInfo: any }) => {
+  const { address, mapUrl, phone, fax, email } = props.storeInfo;
   return (
-    <Stack direction="column" spacing="var(--s-24)">
-      {infoEntries.map(([variant, text]) => (
-        <StoreInfoItem key={variant} variant={variant}>
-          {text}
+    <>
+      {address && (
+        <StoreInfoItem variant="address" href={mapUrl} w="100%">
+          {address}
         </StoreInfoItem>
-      ))}
-    </Stack>
+      )}
+      {email && (
+        <StoreInfoItem
+          variant="email"
+          href={`mailto:${email.trim()}}`}
+          w="100%"
+        >
+          {email}
+        </StoreInfoItem>
+      )}
+      {phone && (
+        <StoreInfoItem
+          variant="phone"
+          href={`tel:${removeAllWhiteSpace(phone)}`}
+          w="100%"
+        >
+          {phone}
+        </StoreInfoItem>
+      )}
+      {fax && (
+        <StoreInfoItem
+          variant="fax"
+          href={`fax:${removeAllWhiteSpace(fax)}`}
+          w="100%"
+        >
+          {fax}
+        </StoreInfoItem>
+      )}
+    </>
   );
 };
 
